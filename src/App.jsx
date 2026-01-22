@@ -1137,12 +1137,16 @@ function App() {
   return (
     <ModalContext.Provider value={{ isModalOpen, openModal, closeModal }}>
       <div className="min-h-screen bg-dark-900 relative">
-        {/* Animated Background Orbs */}
-        <div className="animated-bg">
-          <div className="bg-orb bg-orb-1"></div>
-          <div className="bg-orb bg-orb-2"></div>
-          <div className="bg-orb bg-orb-3"></div>
-        </div>
+        {/* Background Image */}
+        <div
+          className="fixed inset-0 z-0 opacity-40"
+          style={{
+            backgroundImage: 'url(/background.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
 
         <Header />
         <main className="relative z-10">
