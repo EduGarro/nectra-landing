@@ -59,9 +59,9 @@ function Header() {
         {/* Logo - Left */}
         <a href="#" className="flex items-center gap-2 group flex-shrink-0">
           <img
-            src="/Logo Nectra.jpeg"
+            src="/nectra-logo.png"
             alt="Nectra"
-            className="w-10 h-10 rounded-lg object-cover transition-transform duration-300 group-hover:scale-105"
+            className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-105"
           />
           <span className="text-lg font-display font-bold text-gradient-gold hidden sm:block">
             NECTRA
