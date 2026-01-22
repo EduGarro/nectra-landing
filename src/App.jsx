@@ -679,10 +679,15 @@ function Footer() {
           </nav>
 
           {/* CTA */}
-          <CTAButton className="btn-gold px-6 py-3 rounded-full font-semibold inline-flex items-center gap-2">
-            Agenda una consulta
+          <a
+            href="https://wa.me/5492664808574"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-gold px-6 py-3 rounded-full font-semibold inline-flex items-center gap-2"
+          >
+            Contactanos directamente
             <ArrowRight size={18} />
-          </CTAButton>
+          </a>
         </div>
 
         {/* Copyright */}
