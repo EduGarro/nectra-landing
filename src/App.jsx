@@ -3,8 +3,16 @@ import {
   Menu, X, Search, Users, FileText, Lightbulb, Map, Code, Settings,
   ChevronDown, ChevronUp, Bot, Receipt, Target, MessageCircle,
   Zap, ArrowRight, Check, Sparkles, Clock, Cog, Headphones,
-  Info, Loader2, Send, MessageSquare
+  Info, Loader2, Send, MessageSquare, UserPlus
 } from 'lucide-react'
+import AetherFlowHero from './components/AetherFlowHero'
+import ParticleBackground from './components/ParticleBackground'
+import Benefits from './components/Benefits'
+import { TubelightNavbar } from './components/ui/TubelightNavbar'
+import { GlowingEffect } from './components/ui/GlowingEffect'
+import { InteractiveHoverButton } from './components/ui/InteractiveHoverButton'
+import { DottedSurface } from './components/DottedSurface'
+import { NeoMinimalFooter } from './components/NeoMinimalFooter'
 
 // ==================== MODAL CONTEXT ====================
 const ModalContext = createContext()
@@ -181,17 +189,12 @@ function SocialProof() {
     { value: '3x', label: 'ROI promedio' },
   ]
 
-  const clients = [
-    'Cliente 1', 'Cliente 2', 'Cliente 3', 'Cliente 4', 'Cliente 5',
-    'Cliente 6', 'Cliente 7', 'Cliente 8', 'Cliente 9', 'Cliente 10'
-  ]
-
   return (
     <section className="relative py-20 overflow-hidden">
       <div className="section-divider mb-16"></div>
 
       {/* Metrics */}
-      <div className="max-w-7xl mx-auto px-6 mb-16">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {metrics.map((metric, index) => (
             <div
@@ -207,38 +210,19 @@ function SocialProof() {
           ))}
         </div>
       </div>
-
-      {/* Client Logos Ticker */}
-      <div className="relative">
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-dark-900 to-transparent z-10"></div>
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-dark-900 to-transparent z-10"></div>
-
-        <div className="overflow-hidden">
-          <div className="ticker-container">
-            {[...clients, ...clients].map((client, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-40 h-16 mx-6 glass rounded-xl flex items-center justify-center text-gray-500 font-medium opacity-60 hover:opacity-100 transition-opacity"
-              >
-                {client}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </section>
   )
 }
 
 // ==================== SERVICES SECTION (2x2 GRID) ====================
-function Services() {
+function Services({ openModal }) {
   const services = [
     {
       icon: Bot,
-      title: 'Agentes de IA',
+      title: 'Atención al cliente Automatizada',
       description: 'Atención al cliente inteligente 24/7 que se siente humana.',
       points: [
-        'Asistentes de voz para llamadas que atienden a tus clientes 24/7',
+        'Asistentes de IA que atienden a tus clientes 24/7',
         'Respuestas instantáneas y personalizadas en WhatsApp e Instagram',
         'Agendamiento de citas y soporte nivel 1'
       ],
@@ -246,7 +230,7 @@ function Services() {
     },
     {
       icon: Code,
-      title: 'Aplicaciones personalizadas y micro SaaS',
+      title: 'Aplicaciones y Páginas web',
       description: 'Builds que convierten ideas en productos.',
       points: [
         'Aplicaciones web y paneles impulsados por IA',
@@ -267,15 +251,15 @@ function Services() {
       gradient: 'from-pink-500/20 to-rose-500/20'
     },
     {
-      icon: Receipt,
-      title: 'Automatizaciones de Facturación',
-      description: 'Elimina el error humano de tus finanzas.',
+      icon: UserPlus,
+      title: 'Automatización de Leads',
+      description: 'Convierte más leads, más rápido.',
       points: [
-        'Generación y envío automático de facturas',
-        'Conciliación de pagos y control de gastos',
-        'Sincronización con software contable'
+        'Automatiza la calificación de leads',
+        'Seguimientos automáticos y programación de citas',
+        'Agentes de IA que aumentan la conversión sin esfuerzo'
       ],
-      gradient: 'from-green-500/20 to-emerald-500/20'
+      gradient: 'from-blue-500/20 to-cyan-500/20'
     },
   ]
 
@@ -303,6 +287,14 @@ function Services() {
               className="bento-card rounded-3xl p-8 relative overflow-hidden group min-h-[320px] flex flex-col reveal"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
+              {/* GlowingEffect */}
+              <GlowingEffect
+                disabled={false}
+                proximity={150}
+                blur={10}
+                spread={30}
+              />
+
               {/* Background gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
 
@@ -337,10 +329,12 @@ function Services() {
 
         {/* CTA */}
         <div className="text-center mt-12 reveal">
-          <CTAButton className="inline-flex items-center gap-2 text-gold-300 hover:text-gold-200 font-medium transition-colors">
-            ¿No sabes por dónde empezar? Agenda una llamada de descubrimiento
-            <ArrowRight size={18} />
-          </CTAButton>
+          <InteractiveHoverButton
+            onClick={openModal}
+            className="px-8 py-4"
+          >
+            ¿No sabes por dónde empezar? Agenda una llamada
+          </InteractiveHoverButton>
         </div>
       </div>
     </section>
@@ -453,7 +447,7 @@ function NectraDifference() {
 }
 
 // ==================== PROCESS SECTION ====================
-function Process() {
+function Process({ openModal }) {
   const steps = [
     {
       number: '01',
@@ -511,6 +505,14 @@ function Process() {
               className="glass-strong rounded-3xl p-8 sm:p-10 relative reveal group transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-gold-300/10"
               style={{ animationDelay: `${index * 0.15}s` }}
             >
+              {/* GlowingEffect */}
+              <GlowingEffect
+                disabled={false}
+                proximity={150}
+                blur={10}
+                spread={30}
+              />
+
               <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 items-start">
                 {/* Step Number & Icon */}
                 <div className="flex-shrink-0 flex items-center gap-4">
@@ -548,10 +550,12 @@ function Process() {
 
         {/* CTA */}
         <div className="text-center mt-16 reveal">
-          <CTAButton className="btn-gold px-8 py-4 rounded-full text-lg font-semibold inline-flex items-center gap-3">
+          <InteractiveHoverButton
+            onClick={openModal}
+            className="px-8 py-4 text-lg"
+          >
             Reserva tu llamada hoy
-            <ArrowRight size={20} />
-          </CTAButton>
+          </InteractiveHoverButton>
         </div>
       </div>
     </section>
@@ -559,7 +563,7 @@ function Process() {
 }
 
 // ==================== FAQ SECTION ====================
-function FAQ() {
+function FAQ({ openModal }) {
   const [openIndex, setOpenIndex] = useState(null)
 
   const faqs = [
@@ -603,12 +607,20 @@ function FAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="glass rounded-2xl overflow-hidden reveal"
+              className="glass rounded-2xl overflow-hidden reveal relative"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
+              {/* GlowingEffect */}
+              <GlowingEffect
+                disabled={false}
+                proximity={150}
+                blur={10}
+                spread={30}
+              />
+
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full p-6 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
+                className="w-full p-6 flex items-center justify-between text-left hover:bg-white/5 transition-colors relative z-10"
               >
                 <span className="text-lg font-medium text-white pr-4">
                   {faq.question}
@@ -619,7 +631,7 @@ function FAQ() {
               </button>
 
               <div className={`accordion-content ${openIndex === index ? 'open' : ''}`}>
-                <div className="px-6 pb-6 text-gray-400 leading-relaxed">
+                <div className="px-6 pb-6 text-gray-400 leading-relaxed relative z-10">
                   {faq.answer}
                 </div>
               </div>
@@ -632,13 +644,11 @@ function FAQ() {
           <p className="text-gray-400 mb-6 reveal">
             ¿No encontraste lo que buscabas?
           </p>
-          <a
-            href="#contacto"
-            className="glass px-8 py-4 rounded-full font-medium text-white hover:text-gold-300 transition-colors inline-flex items-center gap-2 reveal"
+          <InteractiveHoverButton
+            onClick={openModal}
           >
             Contáctanos directamente
-            <MessageCircle size={18} />
-          </a>
+          </InteractiveHoverButton>
         </div>
       </div>
     </section>
@@ -1137,27 +1147,56 @@ function App() {
   return (
     <ModalContext.Provider value={{ isModalOpen, openModal, closeModal }}>
       <div className="min-h-screen bg-dark-900 relative">
-        {/* Background Image */}
+        {/* Particle Background for Hero */}
+        <ParticleBackground />
+
+        <TubelightNavbar
+          items={[
+            { name: 'Beneficios', url: '#beneficios', icon: Sparkles },
+            { name: 'Servicios', url: '#servicios', icon: Zap },
+            { name: 'Enfoque', url: '#enfoque', icon: Map },
+            { name: 'FAQ', url: '#faq', icon: MessageCircle },
+          ]}
+          openModal={openModal}
+        />
+
+        {/* Hero Section */}
+        <AetherFlowHero openModal={openModal} />
+
+        {/* Smooth Gradient Transition from Hero to Main Content */}
         <div
-          className="fixed inset-0 z-0 opacity-40"
+          className="relative h-40 -mt-20 pointer-events-none z-20"
           style={{
-            backgroundImage: 'url(/background.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
+            background: `linear-gradient(to bottom, 
+              transparent 0%, 
+              rgba(5, 5, 5, 0.5) 40%,
+              rgba(5, 5, 5, 0.9) 80%,
+              rgb(5, 5, 5) 100%
+            )`
           }}
         />
 
-        <Header />
-        <main className="relative z-10">
-          <Hero />
-          <SocialProof />
-          <Services />
-          <NectraDifference />
-          <Process />
-          <FAQ />
-        </main>
-        <Footer />
+        {/* Main content sections with subtle golden accent */}
+        <div className="relative bg-dark-900">
+          {/* Very subtle gold accent - barely visible */}
+          <div
+            className="absolute inset-0 z-0 pointer-events-none"
+            style={{
+              backgroundImage: `
+                radial-gradient(circle at top center, rgba(212, 175, 55, 0.03) 0%, transparent 50%)
+              `,
+            }}
+          />
+
+          <main className="relative z-10">
+            <Benefits />
+            <Services openModal={openModal} />
+            <Process openModal={openModal} />
+            <FAQ openModal={openModal} />
+          </main>
+        </div>
+
+        <NeoMinimalFooter />
         {/* <NectraChat /> */}
         <ContactModal />
       </div>
